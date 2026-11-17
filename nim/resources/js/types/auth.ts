@@ -12,6 +12,16 @@ export type User = {
 
 export type Auth = {
     user: User;
+    can: {
+        membershipRegisterImport: boolean;
+        membershipUpgradeImport: boolean;
+        upgradeTypesManage: boolean;
+        auditLogsView: boolean;
+        batchesView: boolean;
+        reportsView: boolean;
+        settingsManage: boolean;
+        usersManage: boolean;
+    };
 };
 
 export type Passkey = {

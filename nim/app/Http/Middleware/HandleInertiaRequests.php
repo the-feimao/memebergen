@@ -40,6 +40,20 @@ class HandleInertiaRequests extends Middleware
             'name' => config('app.name'),
             'auth' => [
                 'user' => $request->user(),
+                'can' => [
+                    'membershipRegisterImport' => $request->user()?->can('membership.register.import') ?? false,
+                    'membershipUpgradeImport' => $request->user()?->can('membership.upgrades.import') ?? false,
+                    'upgradeTypesManage' => $request->user()?->can('upgrade-types.manage') ?? false,
+                    'auditLogsView' => $request->user()?->can('audit-logs.view') ?? false,
+                    'batchesView' => $request->user()?->can('membership.batches.view') ?? false,
+                    'reportsView' => $request->user()?->can('membership.register.view') ?? false,
+                    'settingsManage' => $request->user()?->can('settings.manage') ?? false,
+                    'usersManage' => $request->user()?->can('users.manage') ?? false,
+                ],
+            ],
+            'flash' => [
+                'success' => $request->session()->get('success'),
+                'error' => $request->session()->get('error'),
             ],
             'sidebarOpen' => ! $request->hasCookie('sidebar_state') || $request->cookie('sidebar_state') === 'true',
         ];
